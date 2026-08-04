@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+
+# Claude Code 개인 설정 (권한 허용 목록 — 사람마다 다름)
+# .claude/settings.json 은 공유용이므로 ignore 하지 않는다
+.claude/settings.local.json
+
+# 비밀값 — OpenAlex API 키 등. 이 저장소엔 코드가 없으므로 원래 들어올 일이 없다
+.env
+.env.*
+*.key
+
+# API 응답 덤프 (커지면 저장소가 무거워진다. 판정 근거는 docs/에 표로 요약해 남긴다)
+data/
+*.jsonl
