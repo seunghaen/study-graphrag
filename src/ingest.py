@@ -7,6 +7,7 @@ OpenAlex → Neo4j 적재 파이프라인
 3. 페이지마다: Paper, Author, Topic 노드 MERGE → 관계 MERGE
 """
 
+import os
 import sys
 
 import requests
@@ -15,9 +16,16 @@ from neo4j import GraphDatabase
 # ──────────────────────────────────────────────
 # 설정
 # ──────────────────────────────────────────────
-NEO4J_URI = "bolt://localhost:7687"
-NEO4J_USER = "neo4j"
-NEO4J_PASSWORD = "***REMOVED***"
+# 접속 정보는 환경변수로 받는다. 코드가 보는 건 os.environ 하나뿐이고
+# 그 값을 누가 채웠는지(로컬 .env / Lambda 환경변수 / Secrets Manager)는 코드가 모른다.
+# 덕분에 6주차에 실행 위치가 바뀌어도 이 파일은 안 고친다.
+#
+# URI·USER는 비밀이 아니라 기본값을 둔다. 비번만 기본값이 없다 —
+# 있으면 "환경변수 세팅을 깜빡했는데 조용히 돌아가는" 경우가 생기고,
+# 그러면 하드코딩을 뺀 의미가 없어진다. 없으면 즉시 죽는 게 맞다.
+NEO4J_URI = os.environ.get("NEO4J_URI", "bolt://localhost:7687")
+NEO4J_USER = os.environ.get("NEO4J_USER", "neo4j")
+NEO4J_PASSWORD = os.environ["NEO4J_PASSWORD"]
 
 # OpenAlex API 설정
 # mailto를 넣으면 polite pool (요청 한도 10배)

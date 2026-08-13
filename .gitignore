@@ -5,10 +5,13 @@
 # .claude/settings.json 은 공유용이므로 ignore 하지 않는다
 .claude/settings.local.json
 
-# 비밀값 — OpenAlex API 키 등. 이 저장소엔 코드가 없으므로 원래 들어올 일이 없다
+# 비밀값 — Neo4j 비번, OpenAlex API 키 등
 .env
 .env.*
 *.key
+# 단 .env.example 은 값이 아니라 "필요한 키 목록"이라 커밋한다.
+# .env.* 가 이걸 잡아버리므로 예외를 명시해야 한다
+!.env.example
 
 # API 응답 덤프 (커지면 저장소가 무거워진다. 판정 근거는 docs/에 표로 요약해 남긴다)
 data/
